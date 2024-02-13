@@ -4,6 +4,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import LoginPage from "./pages/login";
 import LogoutPage from "./pages/logout";
 import MainPage from "./pages/main";
+import "./index.css";
 
 const router = createBrowserRouter([
   { path: "/", element: <MainPage /> },
