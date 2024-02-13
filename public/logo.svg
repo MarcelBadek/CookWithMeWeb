@@ -1,0 +1,15 @@
+<svg width="1000" height="1000" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .main_letter {
+      font: bold 1250px sans-serif;
+    }
+
+    .minor_letter {
+      font: 250px sans-serif;
+    }
+  </style>
+
+  <text x="50" y="950" class="main_letter" fill="#00c728">C</text>
+  <text x="400" y="465" class="minor_letter" fill="#00c728">W</text>
+  <text x="415" y="685" class="minor_letter" fill="#00c728">M</text>
+</svg>
