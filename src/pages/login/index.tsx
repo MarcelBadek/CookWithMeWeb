@@ -11,27 +11,39 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "@/components/ui/input";
 import { useNavigate } from "react-router-dom";
+import { z } from "zod";
 
 const LoginPage: FC = () => {
-  const form = useForm<LoginType>();
   const navigate = useNavigate();
+  const form = useForm<z.infer<typeof LoginType>>({
+    resolver: zodResolver(LoginType),
+    defaultValues: {
+      username: "",
+      password: "",
+    },
+  });
 
-  const sendData: SubmitHandler<LoginType> = (values) => {
+  const login: SubmitHandler<z.infer<typeof LoginType>> = (values) => {
     api.post("/login", values).then((res) => {
       if (res.status == 200) {
         localStorage.setItem("token", res.data["token"]);
         navigate("/");
+      } else {
+        console.log("fail");
+        // TODO
       }
     });
   };
 
   return (
     <>
-      <div className="flex items-center justify-center w-screen h-screen">
+      <div className="flex items-center justify-center w-screen h-screen flex-col">
+        <div className="mb-3 text-2xl">Login</div>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(sendData)} className="h-min">
+          <form onSubmit={form.handleSubmit(login)} className="h-min w-1/4">
             <FormField
               control={form.control}
               name="username"
@@ -39,11 +51,7 @@ const LoginPage: FC = () => {
                 <FormItem>
                   <FormLabel>Username</FormLabel>
                   <FormControl>
-                    <Input
-                      placeholder="Provide username"
-                      {...field}
-                      value={field.value ?? ""}
-                    />
+                    <Input placeholder="Provide username" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -60,16 +68,16 @@ const LoginPage: FC = () => {
                       placeholder="Provide password"
                       type="password"
                       {...field}
-                      value={field.value ?? ""}
                     />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
-            <Button type="submit" className="mt-2">
-              Login
-            </Button>
+            <div className="flex justify-between mt-2">
+              <Button onClick={() => navigate("/")}>Back</Button>
+              <Button type="submit">Login</Button>
+            </div>
           </form>
         </Form>
       </div>
