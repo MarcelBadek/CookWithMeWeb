@@ -1,4 +1,5 @@
 import axios from "axios";
+import { jwtDecode } from "jwt-decode";
 
 export const setToken = (token: string) => {
   localStorage.setItem("token", token);
@@ -10,6 +11,13 @@ export const removeToken = () => {
 
 export const getToken = () => {
   return localStorage.getItem("token");
+};
+
+export const getLogin = () => {
+  const token = getToken();
+  if (token) {
+    return jwtDecode(token)["sub"];
+  }
 };
 
 export const api = axios.create({
