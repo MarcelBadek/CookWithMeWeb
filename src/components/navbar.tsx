@@ -32,6 +32,12 @@ const Navbar: FC = () => {
                 >
                   Home
                 </NavigationMenuLink>
+                <NavigationMenuLink
+                  className={navigationMenuTriggerStyle()}
+                  href="/recipes"
+                >
+                  Recipes
+                </NavigationMenuLink>
               </div>
               <div>
                 {!isLogin ? (
@@ -56,12 +62,13 @@ const Navbar: FC = () => {
                     </div>
                     <NavigationMenuLink
                       className={navigationMenuTriggerStyle()}
+                      href="/account"
                     >
                       My account
                     </NavigationMenuLink>
                     <NavigationMenuLink
-                      href="/logout"
                       className={navigationMenuTriggerStyle()}
+                      href="/logout"
                     >
                       Logout
                     </NavigationMenuLink>

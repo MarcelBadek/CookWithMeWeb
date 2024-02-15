@@ -8,12 +8,16 @@ import MainPage from "./pages/main";
 import RegisterPage from "./pages/register";
 import "./index.css";
 import AuthenticationLayout from "./layouts/AuthutenticationLayout";
+import RecipesPage from "./pages/recipes";
 
 const router = createBrowserRouter([
   {
     path: "/",
     Component: MainLayout,
-    children: [{ path: "/", Component: MainPage }],
+    children: [
+      { path: "/", Component: MainPage },
+      { path: "/recipes", Component: RecipesPage },
+    ],
   },
   {
     path: "/",
