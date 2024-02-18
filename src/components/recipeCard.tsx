@@ -1,22 +1,16 @@
 import { RecipeType } from "@/types/RecipeType";
 import { FC } from "react";
-import { useNavigate } from "react-router-dom";
 
 interface Props {
   recipe: RecipeType;
+  handleClick: (id: string) => void;
 }
 
-const RecipeCard: FC<Props> = ({ recipe }) => {
-  const navigate = useNavigate();
-
-  const handleClick = (id: string) => {
-    navigate(`/recipe/${id}`);
-  };
-
+const RecipeCard: FC<Props> = ({ recipe, handleClick }) => {
   return (
     <>
       <div
-        className="border rounded-md border-bg-accent p-2 cursor-pointer hover:bg-accent"
+        className="border rounded-md border-bg-accent p-2 cursor-pointer hover:bg-accent basis-1/5 grow-0 shrink-0"
         onClick={() => handleClick(recipe.id)}
       >
         <div className="font-bold">{recipe.name}</div>
