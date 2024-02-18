@@ -8,8 +8,10 @@ const MainLayout: FC = () => {
       <div className="w-full">
         <Navbar />
       </div>
-      <div className="w-full h-full">
-        <Outlet />
+      <div className="flex justify-center items-center">
+        <div className="w-4/5">
+          <Outlet />
+        </div>
       </div>
     </>
   );

@@ -62,7 +62,7 @@ const Navbar: FC = () => {
                     </div>
                     <NavigationMenuLink
                       className={navigationMenuTriggerStyle()}
-                      href="/account"
+                      href="/me"
                     >
                       My account
                     </NavigationMenuLink>

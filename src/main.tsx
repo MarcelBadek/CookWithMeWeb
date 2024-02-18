@@ -9,6 +9,9 @@ import RegisterPage from "./pages/register";
 import "./index.css";
 import AuthenticationLayout from "./layouts/AuthutenticationLayout";
 import RecipesPage from "./pages/recipes";
+import AuthenticatedLayout from "./layouts/AuthenticatedLayout";
+import AccountPage from "./pages/account";
+import NotFoundPage from "./pages/notFound";
 
 const router = createBrowserRouter([
   {
@@ -17,6 +20,11 @@ const router = createBrowserRouter([
     children: [
       { path: "/", Component: MainPage },
       { path: "/recipes", Component: RecipesPage },
+      {
+        path: "/",
+        Component: AuthenticatedLayout,
+        children: [{ path: "/me", Component: AccountPage }],
+      },
     ],
   },
   {
@@ -27,6 +35,11 @@ const router = createBrowserRouter([
       { path: "/logout", Component: LogoutPage },
       { path: "/register", Component: RegisterPage },
     ],
+  },
+  {
+    path: "*",
+    Component: MainLayout,
+    children: [{ path: "*", Component: NotFoundPage }],
   },
 ]);
 
