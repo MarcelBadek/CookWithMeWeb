@@ -1,31 +1,5 @@
 import axios from "axios";
-import { jwtDecode } from "jwt-decode";
-
-export const setToken = (token: string) => {
-  localStorage.setItem("token", token);
-};
-
-export const removeToken = () => {
-  localStorage.removeItem("token");
-};
-
-export const getToken = () => {
-  return localStorage.getItem("token");
-};
-
-export const getLogin = () => {
-  const token = getToken();
-  if (token) {
-    return jwtDecode(token)["sub"];
-  }
-};
-
-export const getId = () => {
-  const token = getToken();
-  if (token) {
-    return jwtDecode(token)["id"];
-  }
-};
+import { getToken } from "./authData";
 
 export const api = axios.create({
   baseURL: `http://localhost:8080/api/v1`,

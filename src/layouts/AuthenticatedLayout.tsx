@@ -1,4 +1,4 @@
-import { getToken } from "@/api/api";
+import { getToken } from "@/api/authData";
 import NotFoundPage from "@/pages/notFound";
 import { FC } from "react";
 import { Outlet } from "react-router-dom";

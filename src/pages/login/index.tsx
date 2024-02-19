@@ -43,7 +43,10 @@ const LoginPage: FC = () => {
       <div className="flex items-center justify-center w-screen h-screen flex-col">
         <div className="mb-3 text-2xl">Login</div>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(login)} className="h-min w-1/4">
+          <form
+            onSubmit={form.handleSubmit(login)}
+            className="h-min w-1/4 flex flex-col gap-2"
+          >
             <FormField
               control={form.control}
               name="username"
@@ -74,7 +77,7 @@ const LoginPage: FC = () => {
                 </FormItem>
               )}
             />
-            <div className="flex justify-between mt-2">
+            <div className="flex justify-between">
               <Button onClick={() => navigate("/")}>Back</Button>
               <Button type="submit">Login</Button>
             </div>

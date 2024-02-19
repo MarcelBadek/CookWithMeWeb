@@ -6,7 +6,7 @@ import {
   NavigationMenuList,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
-import { getLogin, getToken } from "@/api/api";
+import { getUsername, getToken } from "@/api/authData";
 
 const Navbar: FC = () => {
   const [isLogin, setLogin] = useState(false);
@@ -58,7 +58,7 @@ const Navbar: FC = () => {
                 ) : (
                   <>
                     <div className="inline-flex cursor-default text-sm px-4 py-2">
-                      {getLogin()}
+                      {getUsername()}
                     </div>
                     <NavigationMenuLink
                       className={navigationMenuTriggerStyle()}

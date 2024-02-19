@@ -1,5 +1,5 @@
+import { removeToken } from "@/api/authData";
 import { FC, useEffect } from "react";
-import { removeToken } from "../../api/api";
 import { useNavigate } from "react-router-dom";
 
 const LogoutPage: FC = () => {
