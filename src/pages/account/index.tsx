@@ -1,9 +1,12 @@
-import { api, getId } from "@/api/api";
-import RecipeCard from "@/components/recipeCard";
+import { api } from "@/api/api";
+import { getId } from "@/api/authData";
+import AccountInformation from "@/components/accountInformation";
+import RecipeList from "@/components/recipeList";
 import { RecipeType } from "@/types/RecipeType";
 import { FC, useEffect, useState } from "react";
 
 const AccountPage: FC = () => {
+  const [selected, setSelected] = useState<number>(1);
   const [data, setData] = useState<RecipeType[]>([]);
 
   const loadData = () => {
@@ -16,6 +19,10 @@ const AccountPage: FC = () => {
 
   useEffect(() => loadData(), []);
 
+  const handleNavClick = (field: number) => {
+    setSelected(field);
+  };
+
   const handleClick = (id: string) => {
     // TODO
     console.log(id);
@@ -23,16 +30,31 @@ const AccountPage: FC = () => {
 
   return (
     <>
-      <div className="border-b-2 mb-2">My recipes</div>
-      <div className="flex justify-center gap-2 flex-wrap">
-        {data &&
-          data.map((recipe) => (
-            <RecipeCard
-              key={recipe.id}
-              recipe={recipe}
+      <div className="flex gap-10">
+        <div>
+          <div
+            className={"cursor-pointer " + (selected === 1 && "font-bold")}
+            onClick={() => handleNavClick(1)}
+          >
+            Recipes
+          </div>
+          <div
+            className={"cursor-pointer " + (selected === 2 && "font-bold")}
+            onClick={() => handleNavClick(2)}
+          >
+            Account
+          </div>
+        </div>
+        <div>
+          {selected === 1 && (
+            <RecipeList
+              header="My recipes"
+              recipes={data}
               handleClick={handleClick}
             />
-          ))}
+          )}
+          {selected === 2 && <AccountInformation />}
+        </div>
       </div>
     </>
   );
