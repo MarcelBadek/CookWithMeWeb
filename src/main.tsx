@@ -12,6 +12,7 @@ import RecipesPage from "./pages/recipes";
 import AuthenticatedLayout from "./layouts/AuthenticatedLayout";
 import AccountPage from "./pages/account";
 import NotFoundPage from "./pages/notFound";
+import RecipePage from "./pages/recipe";
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,7 @@ const router = createBrowserRouter([
     children: [
       { path: "/", Component: MainPage },
       { path: "/recipes", Component: RecipesPage },
+      { path: "/recipe/:id", Component: RecipePage },
       {
         path: "/",
         Component: AuthenticatedLayout,
