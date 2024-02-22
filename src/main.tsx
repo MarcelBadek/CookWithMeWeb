@@ -13,6 +13,7 @@ import AuthenticatedLayout from "./layouts/AuthenticatedLayout";
 import AccountPage from "./pages/account";
 import NotFoundPage from "./pages/notFound";
 import RecipePage from "./pages/recipe";
+import CreateRecipePage from "./pages/createRecipe";
 
 const router = createBrowserRouter([
   {
@@ -25,7 +26,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         Component: AuthenticatedLayout,
-        children: [{ path: "/me", Component: AccountPage }],
+        children: [
+          { path: "/me", Component: AccountPage },
+          { path: "/recipe/create", Component: CreateRecipePage },
+        ],
       },
     ],
   },

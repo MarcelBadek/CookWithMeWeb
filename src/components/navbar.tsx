@@ -38,6 +38,16 @@ const Navbar: FC = () => {
                 >
                   Recipes
                 </NavigationMenuLink>
+                {isLogin && (
+                  <>
+                    <NavigationMenuLink
+                      className={navigationMenuTriggerStyle()}
+                      href="/recipe/create"
+                    >
+                      Add recipe
+                    </NavigationMenuLink>
+                  </>
+                )}
               </div>
               <div>
                 {!isLogin ? (
