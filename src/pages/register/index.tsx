@@ -1,6 +1,6 @@
 import { api } from "@/api/api";
 import { FC } from "react";
-import { RegisterType } from "@/types/RegisterType";
+import { RegisterType } from "@/types/account/RegisterType";
 import { Button } from "@/components/ui/button";
 import {
   Form,

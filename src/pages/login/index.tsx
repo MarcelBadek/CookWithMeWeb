@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { api } from "../../api/api";
-import { LoginType } from "../../types/LoginType";
+import { LoginType } from "../../types/authentication/LoginType";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import {

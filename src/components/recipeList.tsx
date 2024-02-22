@@ -1,10 +1,10 @@
-import { RecipeType } from "@/types/RecipeType";
+import { RecipeType } from "@/types/recipe/RecipeType";
 import { FC } from "react";
 import RecipeCard from "./recipeCard";
 
 interface Props {
   header: string;
-  recipes: RecipeType[];
+  recipes: Zod.infer<typeof RecipeType>[];
   handleClick: (id: string) => void;
 }
 

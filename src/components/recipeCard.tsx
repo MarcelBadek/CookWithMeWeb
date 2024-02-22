@@ -1,8 +1,8 @@
-import { RecipeType } from "@/types/RecipeType";
+import { RecipeType } from "@/types/recipe/RecipeType";
 import { FC } from "react";
 
 interface Props {
-  recipe: RecipeType;
+  recipe: Zod.infer<typeof RecipeType>;
   handleClick: (id: string) => void;
 }
 

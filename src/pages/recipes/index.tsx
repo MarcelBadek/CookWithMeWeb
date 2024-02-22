@@ -1,12 +1,12 @@
 import { api } from "@/api/api";
 import RecipeCard from "@/components/recipeCard";
-import { RecipeType } from "@/types/RecipeType";
+import { RecipeType } from "@/types/recipe/RecipeType";
 import { FC, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const RecipesPage: FC = () => {
   const navigate = useNavigate();
-  const [data, setData] = useState<RecipeType[]>([]);
+  const [data, setData] = useState<Zod.infer<typeof RecipeType>[]>([]);
 
   const getData = () => {
     api.get("/recipes").then((res) => {

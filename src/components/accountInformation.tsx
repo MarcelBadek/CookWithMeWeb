@@ -6,7 +6,7 @@ import {
   getRole,
   getUsername,
 } from "@/api/authData";
-import { AccountUpdateType } from "@/types/AccountUpdateType";
+import { AccountUpdateType } from "@/types/account/AccountUpdateType";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FC } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";

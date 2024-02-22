@@ -1,4 +1,4 @@
-import { JwtPayloadType } from "@/types/JwtPayloadType";
+import { JwtPayloadType } from "@/types/authentication/JwtPayloadType";
 import { jwtDecode } from "jwt-decode";
 
 export enum Role {

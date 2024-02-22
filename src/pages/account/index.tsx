@@ -2,12 +2,12 @@ import { api } from "@/api/api";
 import { getId } from "@/api/authData";
 import AccountInformation from "@/components/accountInformation";
 import RecipeList from "@/components/recipeList";
-import { RecipeType } from "@/types/RecipeType";
+import { RecipeType } from "@/types/recipe/RecipeType";
 import { FC, useEffect, useState } from "react";
 
 const AccountPage: FC = () => {
   const [selected, setSelected] = useState<number>(1);
-  const [data, setData] = useState<RecipeType[]>([]);
+  const [data, setData] = useState<Zod.infer<typeof RecipeType>[]>([]);
 
   const loadData = () => {
     const id = getId();

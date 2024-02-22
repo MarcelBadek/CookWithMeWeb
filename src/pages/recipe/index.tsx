@@ -1,12 +1,12 @@
 import { api } from "@/api/api";
-import { RecipeType } from "@/types/RecipeType";
+import { RecipeType } from "@/types/recipe/RecipeType";
 import { FC, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import NotFoundPage from "../notFound";
 
 const RecipePage: FC = () => {
   const { id } = useParams();
-  const [recipe, setRecipe] = useState<RecipeType>();
+  const [recipe, setRecipe] = useState<Zod.infer<typeof RecipeType>>();
   const [isFounded, setFounded] = useState<boolean>(true);
 
   const loadData = () => {
@@ -15,12 +15,10 @@ const RecipePage: FC = () => {
       .then((res) => {
         if (res.status === 200) {
           setRecipe(res.data);
-          console.log(res.data);
         }
       })
       .catch((_) => {
         setFounded(false);
-        console.log("aaa");
       });
   };
 
