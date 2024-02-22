@@ -17,13 +17,36 @@ import { api } from "@/api/api";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
+import { Popover, PopoverTrigger } from "@/components/ui/popover";
+import { Check, ChevronsUpDown } from "lucide-react";
+import { PopoverContent } from "@/components/ui/popover";
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+} from "@/components/ui/command";
+import { cn } from "@/lib/utils";
 
 const CreateRecipePage: FC = () => {
   const navigate = useNavigate();
   const [categories, setCategories] = useState<z.infer<typeof CategoryType>[]>(
     []
   );
+  const [selectedCategories, _] = useState(
+    new Set<z.infer<typeof CategoryType>>()
+  );
+
+  const toggleCategorySelection = (category: z.infer<typeof CategoryType>) => {
+    const isSelected = selectedCategories.has(category);
+    if (isSelected) {
+      selectedCategories.delete(category);
+    } else {
+      selectedCategories.add(category);
+    }
+  };
+
   const form = useForm<z.infer<typeof RecipeCreateType>>({
     resolver: zodResolver(RecipeCreateType),
     defaultValues: {
@@ -36,6 +59,7 @@ const CreateRecipePage: FC = () => {
   });
 
   const create: SubmitHandler<z.infer<typeof RecipeCreateType>> = (values) => {
+    console.log(values);
     api.post("/recipes", values).then((res) => {
       if (res.status === 201) {
         navigate("/");
@@ -56,7 +80,10 @@ const CreateRecipePage: FC = () => {
   return (
     <>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(create)}>
+        <form
+          onSubmit={form.handleSubmit(create)}
+          className="flex flex-col gap-2"
+        >
           <FormField
             control={form.control}
             name="name"
@@ -100,47 +127,58 @@ const CreateRecipePage: FC = () => {
             <FormField
               control={form.control}
               name="categories"
-              render={() => (
+              render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Categories</FormLabel>
-                  {categories.map((category) => (
-                    <FormField
-                      key={category.id}
-                      control={form.control}
-                      name="categories"
-                      render={({ field }) => {
-                        return (
-                          <FormItem
-                            key={category.id}
-                            className="flex flex-row items-start space-x-3 space-y-0"
-                          >
-                            <FormControl>
-                              <Checkbox
-                                checked={field.value?.some(
-                                  (cat) => cat.id === category.id
+                  <FormLabel className="mr-2">Categories</FormLabel>
+                  <Popover>
+                    <PopoverTrigger asChild>
+                      <FormControl>
+                        <Button variant="outline" role="combobox">
+                          Categories
+                          <ChevronsUpDown />
+                        </Button>
+                      </FormControl>
+                    </PopoverTrigger>
+                    <PopoverContent>
+                      <Command>
+                        <CommandInput placeholder="Select categories" />
+                        <CommandEmpty>No categories found</CommandEmpty>
+                        <CommandGroup>
+                          {categories.map((category) => (
+                            <CommandItem
+                              value={category.name}
+                              key={category.id}
+                              onSelect={() => {
+                                toggleCategorySelection(category);
+                                form.setValue(
+                                  "categories",
+                                  Array.from(selectedCategories)
+                                );
+                              }}
+                            >
+                              <Check
+                                className={cn(
+                                  "mr-2 h-4 w-4",
+                                  field.value?.some(
+                                    (cat) => cat.id === category.id
+                                  )
+                                    ? "opacity-100"
+                                    : "opacity-0"
                                 )}
-                                onCheckedChange={(checked) => {
-                                  return checked
-                                    ? field.onChange([...field.value, category])
-                                    : field.onChange(
-                                        field.value?.filter(
-                                          (value) => value.id !== category.id
-                                        )
-                                      );
-                                }}
                               />
-                            </FormControl>
-                            <FormLabel>{category.name}</FormLabel>
-                          </FormItem>
-                        );
-                      }}
-                    />
-                  ))}
+                              {category.name}
+                            </CommandItem>
+                          ))}
+                        </CommandGroup>
+                      </Command>
+                    </PopoverContent>
+                  </Popover>
                   <FormMessage />
                 </FormItem>
               )}
             />
           )}
+
           <FormField
             control={form.control}
             name="description"
@@ -154,9 +192,7 @@ const CreateRecipePage: FC = () => {
               </FormItem>
             )}
           />
-          <Button type="submit" className="mt-2">
-            Add
-          </Button>
+          <Button type="submit">Add</Button>
         </form>
       </Form>
     </>

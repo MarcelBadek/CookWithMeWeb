@@ -16,7 +16,7 @@ export const RecipeCreateType = z.object({
   ingredients: z.string().min(3, {
     message: "Ingredients must be at least 3 characters.",
   }),
-  description: z.string().min(3, {
+  description: z.string().min(50, {
     message: "Description must be at least 3 characters.",
   }),
   categories: z
